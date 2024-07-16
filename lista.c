@@ -42,12 +42,59 @@ int lista_insere_inicio (struct lista *lista, int chave)
 
 int lista_insere_fim (struct lista *lista, int chave)
 {
+    struct nodo* novo;
 
+    novo = malloc(sizeof(struct nodo));
+    if (novo == NULL) return 0;
+
+    novo->chave = chave;
+    novo->prox = NULL;
+
+    if (lista->ini == NULL) 
+    {
+        lista->ini = novo;
+    } 
+    else 
+    {
+        struct nodo* atual = lista->ini;
+        while (atual->prox != NULL) 
+        {
+            atual = atual->prox;
+        }
+        atual->prox = novo;
+    }
+
+    (lista->tamanho)++;
+    return 1;
 }
 
 int lista_insere_ordenado (struct lista *lista, int chave)
 {
+    struct nodo* novo;
+    
+    novo = malloc(sizeof(struct nodo));
+    if (novd = NULL) return 0;
 
+    novo -> chave = chave;
+
+    if (lista -> ini = NULL || lista -> ini -> chave >= chave)
+    {
+        novo -> prox = lista -> ini;
+        lista -> ini = novo;
+    }
+    else 
+    {
+        struct nodo* atual = lista -> ini;
+        while (atual->prox != NULL && atual->prox->chave < chave) 
+        {
+            atual = atual -> prox;
+        }
+        novo -> prox = atual -> prox;
+        atual -> prox = novo;
+    }
+
+    (lista -> tamanho)++;
+    return 1;
 }
 
 int lista_remove_inicio (struct lista *lista, int *chave)
@@ -92,7 +139,32 @@ int lista_remove_fim (struct lista *lista, int *chave)
 
 int lista_remove_ordenado (struct lista *lista, int chave)
 {
+    if(lista_vazia(lista))return 0;
 
+    struct nodo* atual = atual;
+    struct nodo* anterior = null;
+
+    while (atual != NULL && atual -> chave != chave)
+    {
+        anterior = atual;
+        atual = atual -> prox;
+
+    }
+
+    if (atual == NULL) return 0;
+
+    if (anterior == NULL)
+    {
+        lista -> ini = atual -> prox;
+    }
+    else
+    {
+        anterior -> prox = atual -> prox
+    }
+
+    free(atual);
+    (lista -> tamanho)--;
+    return 1
 }
 
 int lista_vazia (struct lista *lista)
@@ -104,12 +176,19 @@ int lista_vazia (struct lista *lista)
 
 int lista_tamanho (struct lista *lista)
 {
-
+    return lista -> tamanho;
 }
 
 int lista_pertence (struct lista *lista, int chave)
 {
+    struct nodo* atual = lista->ini;
 
+    while (atual != NULL) 
+    {
+        if (atual->chave == chave) return 1;
+        atual = atual->prox;
+    }
+    return 0;
 }
 
 void lista_inicia_iterador (struct lista *lista)
